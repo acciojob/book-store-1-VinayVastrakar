@@ -23,7 +23,7 @@ public class BookController {
     private List<Book> bookList;
     private int id;
 
-    HashMap<Integer,Book> db= new HashMap<>();
+    private HashMap<Integer,Book> db= new HashMap<>();
 
     public List<Book> getBookList() {
         return bookList;
@@ -54,7 +54,8 @@ public class BookController {
         Book book1=book;
         book1.setId(id);
 
-        db.put(id++,book1);
+        db.put(id,book1);
+        id+=1;
 
         bookList.add(book1);
         return new ResponseEntity<>(book, HttpStatus.CREATED);
