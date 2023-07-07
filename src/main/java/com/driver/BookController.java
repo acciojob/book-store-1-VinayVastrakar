@@ -51,13 +51,14 @@ public class BookController {
     @PostMapping("/create-book")
     public ResponseEntity<Book> createBook(@RequestBody Book book){
         // Your code goes here.
-        Book book1=book;
-        book1.setId(id);
+            Book book1=book;
+            book1.setId(id);
 
-        db.put(id,book1);
-        id+=1;
+            db.put(id,book1);
+            id+=1;
 
-        bookList.add(book1);
+            bookList.add(book1);
+
         return new ResponseEntity<>(book, HttpStatus.CREATED);
     }
 
@@ -66,7 +67,11 @@ public class BookController {
     // getBookById()
     @GetMapping("/get-book-by-id/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable("id") int id){
-        Book book = db.get(id);
+        Book book=null;
+        if(db.containsKey(db.get(id))){
+            book = db.get(id);
+        }
+
         return new ResponseEntity<>(book, HttpStatus.FOUND);
     }
 
